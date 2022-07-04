@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Rolling Work</title>
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link href="{% static 'rolling_work/styles.css' %}" rel="stylesheet">
+        <script src="{% static 'rolling_work/time.js' %}"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark justify-content-center sticky-top Nav">
+            <img src="{% static "rolling_work/media/Rolling_Work_Logo_v1.svg" %}" width="60" height="60">
+            <a href="#" class="nav-link ms-5 me-5">Timer</a>
+            <a href="#" class="nav-link ms-5 me-5">Test</a>
+            <a href="#" class="nav-link ms-5 me-5">Ranking</a>
+            <!-- <div class="container-fluid">
+
+                <a href="#">Timer</a>
+                <a href="#">Ranking</a>
+                <a href="#">Test</a>
+            </div> -->
+        </nav>
+        {% block body %} 
+        {% endblock %} 
+    </body>
+</html>

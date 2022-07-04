@@ -1,0 +1,41 @@
+.Nav {
+    background-color: #23967f;
+    height: 100px;
+}
+.Nav a {
+    font-size: 50px;
+    color: #ddfff7;
+}
+@keyframes grow {
+    0% {
+        font-size: 50px;
+        color: #ddfff7;
+    }
+    100% {
+        font-size: 60px;
+        color: #ffa69e;
+    }
+    /* 100% {
+        font-size: 50px;
+        color: #ffa69e;
+    } */
+}
+.Nav a:hover {
+    /* animation: grow 0.5s; */
+    /* animation-name: grow;
+    animation-duration: 0.5s;
+    animation-direction: alternate, normal, ease; */
+    
+    font-size: 60px;
+    color: #ffa69e;
+    transition-duration: 0.5s;
+}
+.Nav a:not(hover) {
+    transition-duration: 1s;
+    font-size: 50px;
+    color: #ddfff7;
+}
+
+.time-area {
+    font-size: 50px;
+}

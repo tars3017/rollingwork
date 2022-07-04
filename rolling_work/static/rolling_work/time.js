@@ -58,7 +58,7 @@ function roll() {
     if (state === "Work") state = "Rest";
     else state = "Work";
 
-    record.appendChild(new_record);
+    record.prepend(new_record);
 }
 function stop_start() {
     pause_btn = document.querySelector('#pause');

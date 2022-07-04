@@ -1,0 +1,27 @@
+{% extends "rolling_work/layout.html" %}
+
+{% block body %} 
+    <h2>Register</h2>
+    {% if msg %}
+        <div>msg</div>
+    {% endif %}
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <input autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <div>
+            <input type="email" name="email" placeholder="Email Address">
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Password">
+        </div>
+        <div>
+            <input type="password" name="confirm" placeholder="Type Password Again">
+        </div>
+        <input type="submit" value="Register">
+    </form>
+
+    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+
+{% endblock %}

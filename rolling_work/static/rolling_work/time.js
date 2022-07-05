@@ -12,6 +12,10 @@ function init() {
     document.querySelector('#roll').style.display = 'none';
     document.querySelector('#pause').style.display = 'none';
     document.querySelector('#save').style.display = 'none';
+
+    document.querySelector('#snowman').style.display = "none";
+    document.querySelector('#space').style.display = "block";
+
     state = "Work";
     last_sec = 0; now_sec = 0;
     sec = 0, min = 0, hr = 0;
@@ -55,8 +59,16 @@ function roll() {
 
     console.log(state);
     new_record.innerHTML = `${state} ${add_zero(hr_passed)}:${add_zero(min_passed)}:${add_zero(sec_passed)}`;
-    if (state === "Work") state = "Rest";
-    else state = "Work";
+    if (state === "Work") {
+        state = "Rest";
+        document.querySelector('#snowman').style.display = "block";
+        document.querySelector('#space').style.display = "none";
+    }
+    else {
+        state = "Work";
+        document.querySelector('#snowman').style.display = "none";
+        document.querySelector('#space').style.display = "block";
+    }
 
     record.prepend(new_record);
 }

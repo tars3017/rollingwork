@@ -98,3 +98,17 @@
     50% {transform: translate(1px, 400px); opacity: 0.9}
     100% { transform: translate(-1px, 810px); opacity: 1;}
 }
+body {
+    background-color: black;
+}
+.inner-center {
+    text-align: center;
+    background-color: rgb(22, 213, 213);
+    box-shadow: 4px 3px 8px rgb(184, 242, 230);
+    width: 500px;
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 10px;
+}

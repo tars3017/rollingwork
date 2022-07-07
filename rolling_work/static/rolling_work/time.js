@@ -49,6 +49,8 @@ function roll() {
     record = document.querySelector('#record-area');
 
     new_record = document.createElement('div');
+    new_record.classList.add('inner-center');
+    // new_record.classList.add('glow');
     
     let sec_passed = now_sec - last_sec;
     last_sec = now_sec;

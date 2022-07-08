@@ -35,10 +35,10 @@ function start_time() {
             if (!is_paused) {
                 sec += 1;
                 now_sec += 1;
-                if (sec > 60) {
+                if (sec >= 60) {
                     sec %= 60; min += 1;
                 }
-                if (min > 60) {
+                if (min >= 60) {
                     min %= 60; hr += 1;
                 }
                 document.querySelector('#cur_time').innerHTML = `${add_zero(hr)}:${add_zero(min)}:${add_zero(sec)}`;

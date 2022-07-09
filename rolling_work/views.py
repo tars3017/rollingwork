@@ -2,8 +2,11 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import IntegrityError
-# from .models import User
+from .models import User, Record
 from django.urls import reverse
+import json
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     print("here")
@@ -52,3 +55,33 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "rolling_work/register.html")
+
+@login_required
+def save(request):
+    data = json.loads(request.body)
+    new_record = Record(
+        owner = request.user,
+        longest_work_period = data["nLWP"],
+        shortest_work_period = data["nSWP"],
+        longest_rest_period = data["nLRP"],
+        shortest_rest_period = data["nSRP"],
+        work_total = data["nWT"],
+        app_total = data["nAT"],
+        roll_count = data["nRC"],
+    )
+    new_record.save()
+    return JsonResponse({"record_id": new_record.id})
+
+@login_required
+def show_record(request, num):
+    record = Record.objects.get(id=num)
+    print(type(request.user.username), type(record.owner.username))
+    if request.user.username != record.owner.username:
+        print("Not the right user!")
+        return render(request, "rolling_work/record.html", {
+            "msg": "You have no permission to see this record!"
+        })
+    print("Show my record")
+    return render(request, "rolling_work/record.html", {
+        "my_record": record
+    })

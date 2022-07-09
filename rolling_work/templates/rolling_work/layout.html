@@ -14,16 +14,17 @@
     </head>
     <body>
         <nav class="navbar navbar-dark justify-content-center sticky-top Nav">
-            <img src="{% static "rolling_work/media/Rolling_Work_Logo_v1.svg" %}" width="60" height="60">
-            <a href="#" class="nav-link ms-5 me-5">Timer</a>
-            <a href="#" class="nav-link ms-5 me-5">Test</a>
+            <a href="#" ><img src="{% static "rolling_work/media/Rolling_Work_Logo_v1.svg" %}" width="60" height="60"></a>
+            {% if user.is_authenticated %}
+                <a href="#" class="nav-link ms-5 me-5">{{ user.username }}</a>
+            {% endif %}
+            <a href="/" class="nav-link ms-5 me-5">Timer</a>
             <a href="#" class="nav-link ms-5 me-5">Ranking</a>
-            <!-- <div class="container-fluid">
-
-                <a href="#">Timer</a>
-                <a href="#">Ranking</a>
-                <a href="#">Test</a>
-            </div> -->
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="nav-link ms-5 me-5">Logout</a>
+            {% else %} 
+                <a href="{% url 'login' %}" class="nav-link ms-5 me-5">Login</a>
+            {% endif %}
         </nav>
         {% block body %} 
         {% endblock %} 

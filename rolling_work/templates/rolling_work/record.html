@@ -1,5 +1,46 @@
 {% extends "rolling_work/layout.html" %}
 
 {% block body %} 
-    <div></div>
+    {% if msg %}
+        <h4>msg</h4>
+    {% endif %}
+    <div class="card-analyze">
+        <div class="row">
+            <div class="col">
+                <h5 class="">Logest Work Period</h5> 
+                <p class="">{{ LWP_hr }}:{{ LWP_min }}:{{ LWP_sc }}</p>
+            </div>
+            <div class="col">
+                <h5 class="">Shortest Work Period</h5> 
+                <p class="">{{ SWP_hr }}:{{ SWP_min }}:{{ SWP_sc }}</p>
+            </div>
+            <div class="col">
+                <h5 class="">Longest Rest Period</h5>
+                <p class="">{{ LRP_hr }}:{{ LRP_min }}:{{ LRP_sc }}</p>
+            </div>
+            <div class="col">
+                <h5 class="">Shortest Rest Period</h5>
+                <p class="">{{ SRP_hr }}:{{ SRP_min }}:{{ SRP_sc }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5 class="">Work Total Time</h5> 
+                <p class="">{{ WT_hr }}:{{ WT_min }}:{{ WT_sc }}</p>
+            </div>
+            <div class="col">
+                <h5 class="">App Total Spend Time</h5>
+                <p class="">{{ AT_hr }}:{{ AT_min }}:{{ AT_sc }}</p>
+            </div>
+            <div class="col">
+                <h5 class="">Roll Count</h5>
+                <p class="">{{ RC }}</p>
+            </div>
+            <div class="col">
+                <h5 class="">Efficienty</h5>
+                <p class="">{{ efficiency }}%</p>
+            </div>
+        </div>
+        
+    </div>
 {% endblock %}

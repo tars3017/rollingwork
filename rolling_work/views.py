@@ -72,6 +72,10 @@ def save(request):
     new_record.save()
     return JsonResponse({"record_id": new_record.id})
 
+def add_zero(num):
+    if num < 10:
+        return '0'+str(num)
+    return str(num)
 @login_required
 def show_record(request, num):
     record = Record.objects.get(id=num)
@@ -81,7 +85,67 @@ def show_record(request, num):
         return render(request, "rolling_work/record.html", {
             "msg": "You have no permission to see this record!"
         })
-    print("Show my record")
+    print("Show my record", record)
+    LWP_sc = record.longest_work_period
+    LWP_min = LWP_sc // 60
+    LWP_sc %= 60
+    LWP_hr = LWP_min // 60
+    LWP_min %= 60
+
+    LRP_sc = record.longest_rest_period
+    LRP_min = LRP_sc // 60
+    LRP_sc %= 60
+    LRP_hr = LRP_min // 60
+    LRP_min %= 60
+
+    SWP_sc = record.shortest_work_period
+    SWP_min = SWP_sc // 60
+    SWP_sc %= 60
+    SWP_hr = SWP_min // 60
+    SWP_min %= 60
+
+    SRP_sc = record.shortest_rest_period
+    SRP_min = SRP_sc // 60
+    SRP_sc %= 60
+    SRP_hr = SRP_min // 60
+    SRP_min %= 60
+
+    WT_sc = record.work_total
+    WT_min = WT_sc // 60
+    WT_sc %= 60
+    WT_hr = WT_min // 60
+    WT_min %= 60
+
+    AT_sc = record.app_total
+    AT_min = AT_sc // 60
+    AT_sc %= 60
+    AT_hr = AT_min // 60
+    AT_min %= 60
     return render(request, "rolling_work/record.html", {
-        "my_record": record
+        "LWP_hr": add_zero(LWP_hr),
+        "LWP_min": add_zero(LWP_min),
+        "LWP_sc": add_zero(LWP_sc),
+
+        "LRP_hr": add_zero(LRP_hr),
+        "LRP_min": add_zero(LRP_min),
+        "LRP_sc": add_zero(LRP_sc),
+
+        "SWP_hr": add_zero(SWP_hr),
+        "SWP_min": add_zero(SWP_min),
+        "SWP_sc": add_zero(SWP_sc),
+
+        "SRP_hr": add_zero(SRP_hr),
+        "SRP_min": add_zero(SRP_min),
+        "SRP_sc": add_zero(SRP_sc),
+
+        "WT_hr": add_zero(WT_hr),
+        "WT_min": add_zero(WT_min),
+        "WT_sc": add_zero(WT_sc),
+
+        "AT_hr": add_zero(AT_hr),
+        "AT_min": add_zero(AT_min),
+        "AT_sc": add_zero(AT_sc),
+
+        "RC": record.roll_count,
+        "efficiency": int(record.work_total / record.app_total * 100),
     })

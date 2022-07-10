@@ -1,27 +1,28 @@
 {% extends "rolling_work/layout.html" %}
 
 {% block body %} 
-    <h2>Register</h2>
-    {% if msg %}
-        <div>msg</div>
-    {% endif %}
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <div>
-            <input autofocus type="text" name="username" placeholder="Username">
-        </div>
-        <div>
-            <input type="email" name="email" placeholder="Email Address">
-        </div>
-        <div>
-            <input type="password" name="password" placeholder="Password">
-        </div>
-        <div>
-            <input type="password" name="confirm" placeholder="Type Password Again">
-        </div>
-        <input type="submit" value="Register">
-    </form>
-
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
-
+    <div class="account-area">
+        <h2 class="account-title">Register</h2>
+        {% if msg %}
+            <div>{{ msg }}</div>
+        {% endif %}
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <div>
+                <input autofocus type="text" name="username" placeholder="Username" class="btn" style="color: rgb(178, 236, 225);">
+            </div>
+            <div>
+                <input type="email" name="email" placeholder="Email Address" class="btn" style="color: rgb(178, 236, 225);">
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="Password" class="btn" style="color: rgb(178, 236, 225);">
+            </div>
+            <div>
+                <input type="password" name="confirm" placeholder="Type Password Again" class="btn" style="color: rgb(178, 236, 225);">
+            </div>
+            <input type="submit" value="Register" class="btn" style="color: rgb(178, 236, 225);">
+        </form>
+    
+        <div class="account-link">Already have an account? <a href="{% url 'login' %}">Log In here.</a></div>
+    </div>
 {% endblock %}

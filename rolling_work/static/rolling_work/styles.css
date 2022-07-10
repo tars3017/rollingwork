@@ -210,7 +210,7 @@
     padding-top: 50px;
     padding-bottom: 50px;
     
-justify-content: center;
+    justify-content: center;
     /* width: 1000px; */
 }
 .card-analyze > div > div{  
@@ -228,4 +228,25 @@ justify-content: center;
 }
 .card-analyze > div > div > p {
     font-size: 35px;
+}
+.account-area {
+    margin-top: 50px;
+    display: grid;
+    justify-content: center;
+    font-size: 33px;
+    color: rgb(140, 222, 220);
+    /* text-align: center; */
+}
+.account-title {
+    
+    text-shadow: 2px 3px 5px rgba(33, 145, 251, 0.7);
+    font-size: 50px;
+}
+.account-area > form > div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.account-link {
+    margin-top: 15px;
+    font-size: 28px;
 }

@@ -38,7 +38,7 @@ def register(request):
         email = request.POST["email"]
 
         password = request.POST["password"]
-        cofirm = request.POST["confirm"]
+        confirm = request.POST["confirm"]
         if password != confirm:
             return render(request, "rolling_work/register.html", {
                 "msg": "Passwords must match."

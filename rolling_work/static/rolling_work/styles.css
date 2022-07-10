@@ -6,31 +6,31 @@
     font-size: 25px;
     color: #ddfff7;
 }
-/* @keyframes grow {
-    0% {
+@media (min-width: 600px) {
+    .Nav a:hover {    
         font-size: 35px;
+        color: #ffa69e;
+        transition-duration: 0.5s;
+    }
+    .Nav a:not(hover) {
+        transition-duration: 1s;
+        font-size: 30px;
         color: #ddfff7;
     }
-    100% {
-        font-size: 50px;
+}
+@media (max-width: 599px) {
+    .Nav a:hover {    
+        font-size: 21px;
         color: #ffa69e;
+        transition-duration: 0.5s;
     }
-} */
-.Nav a:hover {
-    /* animation: grow 0.5s; */
-    /* animation-name: grow;
-    animation-duration: 0.5s;
-    animation-direction: alternate, normal, ease; */
-    
-    font-size: 40px;
-    color: #ffa69e;
-    transition-duration: 0.5s;
+    .Nav a:not(hover) {
+        transition-duration: 1s;
+        font-size: 16px;
+        color: #ddfff7;
+    }
 }
-.Nav a:not(hover) {
-    transition-duration: 1s;
-    font-size: 30px;
-    color: #ddfff7;
-}
+
 
 .time-area {
     font-size: 50px;
@@ -94,10 +94,20 @@
     50% {transform: translate(1px, 400px); opacity: 0.9}
     100% { transform: translate(-1px, 810px); opacity: 1;}
 }
-body {
-    background-color: rgb(33, 26, 29);
-    font-family: 'Times New Roman', cursive;
+@media (min-width: 600px) {
+    body {
+        background-color: rgb(33, 26, 29);
+        font-family: 'Times New Roman', cursive;
+    }
 }
+@media (max-width: 599px) {
+    body {
+        background-color: rgb(221, 101, 153);
+        font-family: 'Times New Roman', cursive;
+    }
+}
+
+
 .record-card {
     text-align: center;
     background-color: rgb(22, 213, 213);

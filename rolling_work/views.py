@@ -148,7 +148,72 @@ def show_record(request, num):
 
         "RC": record.roll_count,
         "efficiency": int(record.work_total / record.app_total * 100),
+
+        "time": record.timestamp.strftime("%b %d, %Y, %H:%M")
     })
 
 def show_about(request):
     return render(request, "rolling_work/about.html")
+
+def show_profile(request, name):
+    if name != request.user.username:
+        return render(request, "rolling_work/profile.html", {
+            "msg": "You have no permission to see this record!"
+        })
+    else:
+        my_records = Record.objects.filter(owner=request.user).all()
+        LWP_avg_hr = 0
+        LWP_avg_ms = 0
+        LWP_avg_sc = 0
+        
+        WT_avg_hr = 0
+        WT_avg_ms = 0
+        WT_avg_sc = 0
+        
+        AT_avg_hr = 0
+        AT_avg_ms = 0
+        AT_avg_sc = 0
+        count = len(my_records)
+        for my_record in my_records:
+            LWP_avg_sc += my_record.longest_work_period
+            WT_avg_sc += my_record.work_total
+            AT_avg_sc += my_record.app_total
+            print(my_record)
+
+        print(WT_avg_sc, AT_avg_sc, count)
+        efficiency_avg = int(WT_avg_sc / AT_avg_sc / count * 100)
+        LWP_avg_sc = int(LWP_avg_sc / count)
+        WT_avg_sc = int(WT_avg_sc / count)
+        AT_avg_sc = int(AT_avg_sc / count)
+        
+
+        LWP_avg_ms = LWP_avg_sc // 60
+        LWP_avg_sc %= 60
+        LWP_avg_hr = LWP_avg_ms // 60
+        LWP_avg_hr %= 60
+
+        WT_avg_ms = LWP_avg_sc // 60
+        WT_avg_sc %= 60
+        WT_avg_hr = LWP_avg_ms // 60
+        WT_avg_ms %= 60
+
+        AT_avg_ms = AT_avg_sc // 60
+        AT_avg_sc %= 60
+        AT_avg_hr = AT_avg_ms // 60
+        AT_avg_ms %= 60
+        
+        return render(request, "rolling_work/profile.html", {
+            "LWP_hr": add_zero(LWP_avg_hr),
+            "LWP_min": add_zero(LWP_avg_ms),
+            "LWP_sc": add_zero(LWP_avg_sc),
+
+            "WT_hr": add_zero(WT_avg_hr),
+            "WT_min": add_zero(WT_avg_ms),
+            "WT_sc": add_zero(WT_avg_sc),
+
+            "AT_hr": add_zero(AT_avg_hr),
+            "AT_min": add_zero(AT_avg_ms),
+            "AT_sc": add_zero(AT_avg_sc),
+
+            "efficiency": efficiency_avg
+        })

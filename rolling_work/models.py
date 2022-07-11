@@ -6,7 +6,7 @@ class User(AbstractUser):
 
 class Record(models.Model):
     owner = models.ForeignKey("User", on_delete=models.CASCADE)
-    time_stamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
     
     # app data (counted by seconds)
     longest_work_period = models.IntegerField(default=0)
@@ -18,4 +18,4 @@ class Record(models.Model):
     roll_count = models.IntegerField(default=0)
 
     def __str__(self):
-        return f'({self.id}) {self.owner.username} at {self.time_stamp.strftime("%b %d %Y, %I:%M %p")}'
+        return f'({self.id}) {self.owner.username} at {self.timestamp.strftime("%b %d %Y, %H:%M")}'

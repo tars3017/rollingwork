@@ -233,6 +233,13 @@ body {
 .card-analyze > div > div > p {
     font-size: 35px;
 }
+.record-time {
+    font-size: 30px;
+    color: rgb(217, 255, 248);
+    text-shadow: 1px 1px 3px rgb(219, 216, 240);
+    margin-bottom: 30;
+}
+
 .account-area {
     margin-top: 50px;
     display: grid;
@@ -278,4 +285,8 @@ body {
 }
 .about-area > div > p > a, #email-name {
     color: rgb(247, 152, 36);
+}
+
+.error-msg {
+    color:rgb(86, 203, 249);
 }

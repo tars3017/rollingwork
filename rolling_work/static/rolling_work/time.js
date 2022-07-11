@@ -1,13 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('line 2');
     init();
-    document.querySelector('#start').addEventListener('click', start_time);
-    document.querySelector('#roll').addEventListener('click', roll_func);
-    document.querySelector('#pause').addEventListener('click', stop_start);
+    update_time();
+    if (document.querySelector('#start') !== null) {
+        document.querySelector('#start').addEventListener('click', start_time);
+    }
+    if (document.querySelector('#roll') !== null) {
+        document.querySelector('#roll').addEventListener('click', roll_func);
+    }
+    if (document.querySelector('#click') !== null) {
+        document.querySelector('#pause').addEventListener('click', stop_start);
+    }
+    
     if (document.querySelector('#save') !== null) {
         document.querySelector('#save').addEventListener('click', save_record);
     }
-    window.onload = updateCheck();
+    // window.onload = updateCheck;
 });
 var state, last_sec, now_sec;
 var is_paused = false;
@@ -18,16 +26,26 @@ var LWP, LRP, WT, AT, RC;
 var SWP, SRP;
 
 function init() {
-    document.querySelector('#start').style.display = 'block';
-    document.querySelector('#roll').style.display = 'none';
-    document.querySelector('#pause').style.display = 'none';
+    if (document.querySelector('#start') !== null) {
+        document.querySelector('#start').style.display = 'block';
+    }
+    if (document.querySelector('#roll') !== null) {
+        document.querySelector('#roll').style.display = 'none';
+    }
+    if (document.querySelector('#pause') !== null) {
+        document.querySelector('#pause').style.display = 'none';
+    }
     if (document.querySelector('#save') !== null) {
         document.querySelector('#save').style.display = 'none';
     }
 
-    document.querySelector('#snowman').style.display = "none";
-    document.querySelector('#space').style.display = "block";
-
+    if (document.querySelector('#snowman') !== null) {
+        document.querySelector('#snowman').style.display = "none";
+    }
+    if (document.querySelector('#space') !== null) {
+        document.querySelector('#space').style.display = "block";
+    }
+    
     state = "Work";
     last_sec = 0; now_sec = 0;
     sec = 0, min = 0, hr = 0;
@@ -110,17 +128,24 @@ function stop_start() {
         is_paused = false;
         pause_btn.innerHTML = "Pause";
         document.querySelector('#roll').style.display = 'block';
+        // if (document.querySelector('#save') !== null) {
+        //     document.querySelector('#save').style.display = 'none';
+        // }
     }
     else {
         console.log('B');
         is_paused = true;
         pause_btn.innerHTML = "Resume";
         document.querySelector('#roll').style.display = 'none';
+        // if (document.querySelector('#save') !== null) {
+        //     document.querySelector('#save').style.display = 'block';
+        // }
     }
 }
 // var LWP, LRP, WT, AT, RC;
 // var SWP, SRP;
 function save_record() {
+    roll_func();
     stop_start();
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     console.log(csrftoken);
@@ -149,4 +174,38 @@ function save_record() {
         console.log(data["record_id"]);
         location.href = `/record/${data["record_id"]}`;
     });    
+}
+
+function update_time() {
+    document.querySelectorAll('.record-time').forEach(clock => {
+        let time = clock.innerHTML;
+        
+        const hour_regex = /[0-9]+:/g;
+        const hour_idx = time.search(hour_regex);
+        const hour_str = time.slice(hour_idx, hour_idx+2);
+        let hour = Number(hour_str);
+        
+        const date_regex = /[0-9]+,/g;
+        const date_idx = time.search(date_regex);
+        const date_str = time.slice(date_idx, date_idx+2);
+        let date = Number(date_str);
+
+        console.log(hour, date);
+
+        const d = new Date();
+        let diff = d.getTimezoneOffset() / (-60);
+        hour += diff;
+        if (hour >= 24) {
+            hour %= 24;
+            date += 1;
+            time = time.replace(date_str, add_zero(date));
+        }
+        else if (hour < 0) {
+            hour += 24;
+            date -= 1;
+            time = time.replace(date_str, add_zero(date));
+        }
+        time = time.replace(hour_str, add_zero(hour));
+        clock.innerHTML = time;
+    });
 }

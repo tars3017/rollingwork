@@ -1,0 +1,31 @@
+{% extends "rolling_work/layout.html" %}
+
+{% block body %} 
+    {% if msg %}
+        <h4 class="error-msg">{{ msg }}</h4>
+    {% endif %}
+    <div class="card-analyze">
+        <div class="row">
+            <div class="col">
+                <h5 class="">Average Logest Work Period</h5> 
+                <p class="">{{ LWP_hr }}:{{ LWP_min }}:{{ LWP_sc }}</p>
+            </div>
+            <div class="col">
+                <h5 class="">Average Efficienty</h5>
+                <p class="">{{ efficiency }}%</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5 class="">Average Work Total Time</h5> 
+                <p class="">{{ WT_hr }}:{{ WT_min }}:{{ WT_sc }}</p>
+            </div>
+            <div class="col">
+                <h5 class="">Average App Total Spend Time</h5>
+                <p class="">{{ AT_hr }}:{{ AT_min }}:{{ AT_sc }}</p>
+            </div>
+            
+        </div>
+        
+    </div>
+{% endblock %}

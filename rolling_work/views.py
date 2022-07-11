@@ -149,3 +149,6 @@ def show_record(request, num):
         "RC": record.roll_count,
         "efficiency": int(record.work_total / record.app_total * 100),
     })
+
+def show_about(request):
+    return render(request, "rolling_work/about.html")

@@ -250,3 +250,28 @@
     margin-top: 15px;
     font-size: 28px;
 }
+
+.about-area {
+    margin-top: 50px;
+    padding-left: 25%;
+    padding-right: 25%;
+    display: grid;
+    justify-content: left;
+    /* background-color: aqua; */
+    color: rgb(51, 161, 253);
+}
+.about-area > div {
+    text-shadow: 1px 1px 3px rgba(38, 240, 241, 0.3);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.about-area > div > h5 {
+    font-size: 30px;
+    color: rgb(201, 215, 248);
+}
+.about-area > div > p {
+    font-size: 28px;
+}
+.about-area > div > p > a, #email-name {
+    color: rgb(247, 152, 36);
+}

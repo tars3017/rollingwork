@@ -161,7 +161,7 @@ def show_profile(request, name):
             "msg": "You have no permission to see this record!"
         })
     else:
-        my_records = Record.objects.filter(owner=request.user).all()
+        my_records = Record.objects.filter(owner=request.user).order_by("-timestamp").all()
         LWP_avg_hr = 0
         LWP_avg_ms = 0
         LWP_avg_sc = 0

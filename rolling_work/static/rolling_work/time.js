@@ -1,14 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('line 2');
     init();
     update_time();
     if (document.querySelector('#start') !== null) {
         document.querySelector('#start').addEventListener('click', start_time);
     }
     if (document.querySelector('#roll') !== null) {
-        document.querySelector('#roll').addEventListener('click', roll_func);
+        document.querySelector('#roll').addEventListener('click', () => roll_func(true));
     }
-    if (document.querySelector('#click') !== null) {
+    if (document.querySelector('#pause') !== null) {
         document.querySelector('#pause').addEventListener('click', stop_start);
     }
     
@@ -81,7 +80,7 @@ function start_time() {
             }
         }, 1000);
 }
-function roll_func() {
+function roll_func(ctl) {
     record = document.querySelector('#record-area');
 
     new_record = document.createElement('div');
@@ -107,20 +106,26 @@ function roll_func() {
 
     console.log(state);
     new_record.innerHTML = `${state} ${add_zero(hr_passed)}:${add_zero(min_passed)}:${add_zero(sec_passed)}`;
-    if (state === "Work") {
-        state = "Rest";
-        document.querySelector('#snowman').style.display = "block";
-        document.querySelector('#space').style.display = "none";
-    }
-    else {
-        state = "Work";
-        document.querySelector('#snowman').style.display = "none";
-        document.querySelector('#space').style.display = "block";
+    if (ctl) { // from click not from pause
+        if (state === "Work") {
+            state = "Rest";
+            document.querySelector('#snowman').style.display = "block";
+            document.querySelector('#space').style.display = "none";
+        }
+        else {
+            state = "Work";
+            document.querySelector('#snowman').style.display = "none";
+            document.querySelector('#space').style.display = "block";
+        }
     }
 
     record.prepend(new_record);
 }
 function stop_start() {
+    console.log("stop start", state, is_paused);
+    if (state === "Work" && !is_paused) {
+        roll_func(false);
+    }
     pause_btn = document.querySelector('#pause');
     console.log(pause_btn.innerHTML);
     if (is_paused) { // continue
@@ -171,7 +176,7 @@ function save_record() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data["record_id"]);
+        // console.log(data["record_id"]);
         location.href = `/record/${data["record_id"]}`;
     });    
 }
@@ -190,7 +195,7 @@ function update_time() {
         const date_str = time.slice(date_idx, date_idx+2);
         let date = Number(date_str);
 
-        console.log(hour, date);
+        // console.log(hour, date);
 
         const d = new Date();
         let diff = d.getTimezoneOffset() / (-60);

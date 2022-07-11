@@ -174,11 +174,13 @@ def show_profile(request, name):
         AT_avg_ms = 0
         AT_avg_sc = 0
         count = len(my_records)
+        history = []
         for my_record in my_records:
+            history.append(my_record.brief_view())
             LWP_avg_sc += my_record.longest_work_period
             WT_avg_sc += my_record.work_total
             AT_avg_sc += my_record.app_total
-            print(my_record)
+            # print(my_record.brief_view())
 
         print(WT_avg_sc, AT_avg_sc, count)
         efficiency_avg = int(WT_avg_sc / AT_avg_sc / count * 100)
@@ -215,5 +217,6 @@ def show_profile(request, name):
             "AT_min": add_zero(AT_avg_ms),
             "AT_sc": add_zero(AT_avg_sc),
 
-            "efficiency": efficiency_avg
+            "efficiency": efficiency_avg,
+            "history": history,
         })

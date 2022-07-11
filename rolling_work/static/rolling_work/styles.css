@@ -131,6 +131,10 @@ body {
 
     animation: grow 0.7s linear;
 }
+/* .record-card > a {
+    /* for profile.html */
+    color: rgb(21, 5, 120); 
+} */
 @keyframes grow{
     0% {
         position: relative;

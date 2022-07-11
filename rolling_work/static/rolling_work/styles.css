@@ -94,7 +94,11 @@
     50% {transform: translate(1px, 400px); opacity: 0.9}
     100% { transform: translate(-1px, 810px); opacity: 1;}
 }
-@media (min-width: 600px) {
+body {
+    background-color: rgb(33, 26, 29);
+    font-family: 'Times New Roman', cursive;
+}
+/* @media (min-width: 600px) {
     body {
         background-color: rgb(33, 26, 29);
         font-family: 'Times New Roman', cursive;
@@ -105,7 +109,7 @@
         background-color: rgb(221, 101, 153);
         font-family: 'Times New Roman', cursive;
     }
-}
+} */
 
 
 .record-card {

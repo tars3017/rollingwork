@@ -183,10 +183,19 @@ def show_profile(request, name):
             # print(my_record.brief_view())
 
         # print(WT_avg_sc, AT_avg_sc, count)
-        efficiency_avg = int(WT_avg_sc / AT_avg_sc / count * 100)
-        LWP_avg_sc = int(LWP_avg_sc / count)
-        WT_avg_sc = int(WT_avg_sc / count)
-        AT_avg_sc = int(AT_avg_sc / count)
+        if AT_avg_sc and count:
+            efficiency_avg = int(WT_avg_sc / AT_avg_sc / count * 100)
+        else:
+            efficiency_avg = 0
+
+        if count:
+            LWP_avg_sc = int(LWP_avg_sc / count)
+            WT_avg_sc = int(WT_avg_sc / count)
+            AT_avg_sc = int(AT_avg_sc / count)
+        else:
+            LWP_avg_sc = 0
+            WT_avg_sc = 0
+            AT_avg_sc = 0
         
 
         LWP_avg_ms = LWP_avg_sc // 60

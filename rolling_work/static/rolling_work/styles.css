@@ -294,3 +294,46 @@ body {
 .error-msg {
     color:rgb(86, 203, 249);
 }
+
+.rank-method {
+    width:300px;
+    margin-left: 60%;
+    margin-top:50px;
+    text-align: left;
+    font-size: 30px;
+    color: rgb(234, 240, 206);
+}
+select.rank-method {
+    width:300px;
+    margin-left: 60%;
+    text-align: center;
+    font-size: 25px;
+    border-radius: 20px;
+    color: rgb(54, 54, 54);
+    box-shadow: 0 0 3px 3px rgb(82, 209, 220);
+    margin-top: 15px;
+    background-color: rgb(163, 169, 170);
+}
+.rank-bar {
+    color: rgb(239, 171, 255);
+    border-radius: 20px;
+    border-color: rgb(220, 107, 173);
+    border-width: 3px;
+    border: solid;
+    padding-left: 150px;
+    padding-right: 150px;
+    margin-top: 30px;
+    box-shadow: 0 0 3px 3px rgba(220, 107, 173, 0.6);
+}
+
+.profile-card {
+    color: rgb(239, 171, 255);
+    border-radius: 20px;
+    border-color: rgb(220, 107, 173);
+    border-width: 3px;
+    border: solid;
+    padding-left: 150px;
+    padding-right: 150px;
+    margin-top: 30px;
+    box-shadow: 0 0 3px 3px rgba(220, 107, 173, 0.6);
+}

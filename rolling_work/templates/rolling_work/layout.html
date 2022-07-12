@@ -21,7 +21,7 @@
                 <a href="{% url 'profile' user.username %}" class="nav-link ms-5 me-5">{{ user.username }}</a>
             {% endif %}
             <a href="/" class="nav-link ms-5 me-5">Timer</a>
-            <a href="#" class="nav-link ms-5 me-5">Ranking</a>
+            <a href="/rank" class="nav-link ms-5 me-5">Ranking</a>
             {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}" class="nav-link ms-5 me-5">Logout</a>
             {% else %} 

@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
 def index(request):
-    print("here")
+    # print("here")
     return render(request, 'rolling_work/index.html')
 
 def login_view(request):
@@ -79,13 +79,13 @@ def add_zero(num):
 @login_required
 def show_record(request, num):
     record = Record.objects.get(id=num)
-    print(type(request.user.username), type(record.owner.username))
+    # print(type(request.user.username), type(record.owner.username))
     if request.user.username != record.owner.username:
-        print("Not the right user!")
+        # print("Not the right user!")
         return render(request, "rolling_work/record.html", {
             "msg": "You have no permission to see this record!"
         })
-    print("Show my record", record)
+    # print("Show my record", record)
     LWP_sc = record.longest_work_period
     LWP_min = LWP_sc // 60
     LWP_sc %= 60
@@ -182,7 +182,7 @@ def show_profile(request, name):
             AT_avg_sc += my_record.app_total
             # print(my_record.brief_view())
 
-        print(WT_avg_sc, AT_avg_sc, count)
+        # print(WT_avg_sc, AT_avg_sc, count)
         efficiency_avg = int(WT_avg_sc / AT_avg_sc / count * 100)
         LWP_avg_sc = int(LWP_avg_sc / count)
         WT_avg_sc = int(WT_avg_sc / count)
@@ -220,3 +220,26 @@ def show_profile(request, name):
             "efficiency": efficiency_avg,
             "history": history,
         })
+
+def show_rank(request, cat = None):
+    # longest_work_period work_total
+    rank_by = cat
+    if rank_by == None:
+        rank_by = "longest_work_period"
+    rank_list = Record.objects.order_by("-"+rank_by).all()
+    pretty_list = []
+    for i in range(min(10, len(rank_list))):
+        now_item = rank_list[i].rank_view()
+        now_item["rank"] = i+1
+        # print(type(now_item))
+        pretty_list.append(now_item)
+    # print(pretty_list)
+    if cat == None:
+        return render(request, "rolling_work/rank.html", {
+            "rank": pretty_list,
+            "ctl": rank_by,
+        })
+    else:
+        # print('return json response')
+        return JsonResponse(pretty_list, safe=False)
+    # rank by [x]efficiency, by LWP, WT

@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('#save') !== null) {
         document.querySelector('#save').addEventListener('click', save_record);
     }
+
+    if (document.querySelector('#rank-select') !== null) {
+        document.querySelector('#rank-select').onchange = change_rank;
+    }
     // window.onload = updateCheck;
 });
 var state, last_sec, now_sec;
@@ -150,8 +154,10 @@ function stop_start() {
 // var LWP, LRP, WT, AT, RC;
 // var SWP, SRP;
 function save_record() {
+    // roll_func();
+    // stop_start();
     roll_func();
-    stop_start();
+    RC -= 1;
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     console.log(csrftoken);
     console.log('save');
@@ -161,6 +167,13 @@ function save_record() {
         '/save',
         {headers: {'X-CSRFToken': csrftoken}}
     );
+    console.log(SWP, SRP);
+    if (SWP === 86400) {
+        SWP = 0;
+    }
+    if (SRP === 86400) {
+        SRP = 0;
+    }
     fetch(request, {
         method: 'POST',
 
@@ -213,4 +226,41 @@ function update_time() {
         time = time.replace(hour_str, add_zero(hour));
         clock.innerHTML = time;
     });
+}
+
+function change_rank() {
+    rank_select = document.querySelector('#rank-select');
+    let rank_value = rank_select.options[rank_select.selectedIndex].value;
+    // console.log(rank_value);
+    fetch(`/rank/${rank_value}`, {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const rank_area = document.querySelector('#rank-area');
+        let first = rank_area.firstElementChild;
+        while (first) {
+            first.remove();
+            first = rank_area.firstElementChild;
+        }
+        data.forEach(rr => {
+            console.log(rr.rank);
+            let new_bar = document.createElement('div');
+            new_bar.className = "rank-bar";
+            if (rank_value === 'longest_work_period') {
+                new_bar.innerHTML = `Rank.${rr.rank} By ${rr.user} ${rr.lwp}
+                <span style="font-size: 22px;text-shadow: 0 0 0 rgb(0,0,0);" class="record-time">  at 
+                ${rr.time}`;
+                // console.log('work');
+            }
+            else {
+                new_bar.innerHTML = `Rank.${rr.rank} By ${rr.user} ${rr.wt}
+                <span style="font-size: 22px;text-shadow: 0 0 0 rgb(0,0,0);" class="record-time">  at 
+                ${rr.time}`;
+                // console.log('total');
+            }
+            rank_area.appendChild(new_bar);
+        });
+    })
 }

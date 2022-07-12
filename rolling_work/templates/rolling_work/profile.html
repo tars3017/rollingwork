@@ -27,9 +27,9 @@
             
         </div>
     </div>
-    <div class="center" id="record-area" style="margin-top: 50px;">
+    <div class="account-area" style="margin-top: 50px;">
         {% for now_his in history %} 
-        <a href="{% url 'record' now_his.id %}"><div class="record-card record-time" style="font-size: 25px;">{{ now_his.history_str }}</div></a>
+        <a style="text-decoration: none;" href="{% url 'record' now_his.id %}"><div class="profile-card">{{ now_his.history_str }}</div></a>
         {% endfor %}
     </div>
 {% endblock %}

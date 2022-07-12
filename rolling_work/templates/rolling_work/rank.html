@@ -1,0 +1,23 @@
+{% extends "rolling_work/layout.html" %}
+
+{% block body %} 
+    <div class="dropdown">
+        <label class="rank-method">Rank by: </label>
+        <select class="form-select rank-method" id="rank-select">
+        <option value="longest_work_period" selected>Longest Work Period</option>
+        <option value="work_total">Work Total</option>
+        </select>
+    </div>
+    <div class="account-area" id="rank-area">
+        
+        {% for now in rank %} 
+            {% if ctl == 'longest_work_period' %} 
+                <div class="rank-bar">Rank.{{ now.rank }} By {{ now.user }} {{ now.lwp }}
+                    <span style="font-size: 22px;text-shadow: 0 0 0 rgb(0,0,0);" class="record-time">  at {{ now.time }}</span></div>
+            {% else %} 
+                <div class="rank-bar">Rank.{{ now.rank }} By {{ now.user }} {{ now.wt }}
+                    <span style="font-size: 22px;text-shadow: 0 0 0 rgb(0,0,0);" class="record-time">  at {{ now.time }}</span></div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

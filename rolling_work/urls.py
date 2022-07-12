@@ -10,4 +10,6 @@ urlpatterns = [
     path("record/<int:num>", views.show_record, name="record"),
     path("about", views.show_about, name="about"),
     path("profile/<str:name>", views.show_profile, name="profile"),
+    path("rank", views.show_rank, name="rank"),
+    path("rank/<str:cat>", views.show_rank, name="rank"),
 ]

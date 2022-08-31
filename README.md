@@ -7,7 +7,6 @@
 `source ./venv/bin/activate`
 3. Run the program on local side  
 `python manage.py runserver`  
-* (Admin account: root  password: welcome1234)
 
 ## How to use the app?
 1. Create a account
